@@ -25,6 +25,7 @@ class ExpressionsTest {
         Expressions expressions = new Expressions();
 
         HashSet<String> valids = new HashSet<>(Arrays.asList(
+                "Five",
                 "five",
                 "5"
         ));
