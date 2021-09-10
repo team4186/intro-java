@@ -40,4 +40,25 @@ class ExpressionsTest {
         Expressions expressions = new Expressions();
         assertTrue(expressions.tellTheTrue());
     }
+
+    @Test
+    @Order(4)
+    @DisplayName("Use the ternary operator expression? when true : when false")
+    void useTheTernary() {
+        Expressions expressions = new Expressions();
+
+        Object onTrue = "True";
+        Object onFalse = "False";
+
+        assertEquals(expressions.useTheTernary(true, onTrue, onFalse), onTrue);
+        assertEquals(expressions.useTheTernary(false, onTrue, onFalse), onFalse);
+    }
+
+    @Test
+    @Order(5)
+    @DisplayName("Just call Expressions.giveMe5() function inside your function")
+    void callGiveMe5() {
+        Expressions expressions = new Expressions();
+        assertEquals(expressions.callGiveMe5(), 5);
+    }
 }
