@@ -1,7 +1,5 @@
 # 2021-intro-java
 
----
-
 This project contains simple exercises trying to train the student in the ways of programming.
 
 It is build using the [Gradle](https://gradle.org/) build system because this is how we build our software for the robot,
