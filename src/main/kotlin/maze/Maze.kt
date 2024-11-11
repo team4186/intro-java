@@ -1,87 +1,74 @@
-package maze;
+package maze
 
-import impl.maze.Commands;
-import impl.maze.Robot;
-import impl.maze.Scenario;
-import org.jetbrains.annotations.NotNull;
+import impl.maze.Scenario
 
-import static impl.Tools.ToDo;
 
-public interface Maze {
-
-    class Simple implements Scenario {
-        @Override
-        public String[] createMap() {
-            return new String[]{
-                    "#######",
-                    "#→   x#",
-                    "#######"
-            };
+interface Maze {
+    class Simple : Scenario {
+        override fun createMap(): Array<String> {
+            return arrayOf(
+                "#######",
+                "#→   x#",
+                "#######"
+            )
         }
 
-        @Override
-        public void step(@NotNull Robot robot, @NotNull Commands commands) {
-            ToDo("Make the arrow reach the X");
+        override fun step(robot: impl.maze.Robot, commands: impl.maze.Commands) {
+            TODO("Make the arrow reach the X")
+//            commands.move()
         }
     }
 
-    class NotSoSimple implements Scenario {
-        @Override
-        public String[] createMap() {
-            return new String[]{
-                    "#######",
-                    "#→    #",
-                    "#     #",
-                    "#     #",
-                    "#    x#",
-                    "#######",
-            };
+    class NotSoSimple : Scenario {
+        override fun createMap(): Array<String> {
+            return arrayOf(
+                "#######",
+                "#→    #",
+                "#     #",
+                "#     #",
+                "#    x#",
+                "#######",
+            )
         }
 
-        @Override
-        public void step(@NotNull Robot robot, @NotNull Commands commands) {
-            ToDo("Make the arrow reach the X");
+        override fun step(robot: impl.maze.Robot, commands: impl.maze.Commands) {
+            TODO("Make the arrow reach the X")
         }
     }
 
-    class KindaComplex implements Scenario {
-        @Override
-        public String[] createMap() {
-            return new String[]{
-                    "######      ###",
-                    "#→   #      #x#",
-                    "#### # ###### #",
-                    "   # ###      #",
-                    "   #     ######",
-                    "   #######     "
-            };
+    class KindaComplex : Scenario {
+        override fun createMap(): Array<String> {
+            return arrayOf(
+                "######      ###",
+                "#→   #      #x#",
+                "#### # ###### #",
+                "   # ###      #",
+                "   #     ######",
+                "   #######     "
+            )
         }
 
-        @Override
-        public void step(@NotNull Robot robot, @NotNull Commands commands) {
-            ToDo("Make the arrow reach the X");
+        override fun step(robot: impl.maze.Robot, commands: impl.maze.Commands) {
+            TODO("Make the arrow reach the X")
         }
     }
 
-    class Complex implements Scenario {
-        @Override
-        public String[] createMap() {
-            return new String[]{
-                    "######### ###",
-                    "#→      # #x#",
-                    "#### ## # # #",
-                    "   # ## # # #",
-                    "   #    # # #",
-                    "   ### #### #",
-                    "     #      #",
-                    "     ########"
-            };
+    class Complex : Scenario {
+        override fun createMap(): Array<String> {
+            return arrayOf(
+                "######### ###",
+                "#→      # #x#",
+                "#### ## # # #",
+                "   # ## # # #",
+                "   #    # # #",
+                "   ### #### #",
+                "     #      #",
+                "     ########"
+            )
         }
 
-        @Override
-        public void step(@NotNull Robot robot, @NotNull Commands commands) {
-            ToDo("Make the arrow reach the X");
+        override fun step(robot: impl.maze.Robot, commands: impl.maze.Commands) {
+            TODO("Make the arrow reach the X")
         }
     }
-
 }

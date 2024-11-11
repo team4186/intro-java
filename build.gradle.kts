@@ -1,7 +1,7 @@
 plugins {
-  kotlin("jvm") version "1.5.31"
-  id("org.jetbrains.compose") version "1.0.0-alpha4-build362"
-  java
+  kotlin("jvm") version "2.0.21"
+  id("org.jetbrains.compose") version "1.6.11"
+  id("org.jetbrains.kotlin.plugin.compose") version "2.0.21"
 }
 
 group = "frc4186"
@@ -15,9 +15,8 @@ repositories {
 
 dependencies {
   implementation(compose.desktop.currentOs)
-  implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.21")
-  testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+  testImplementation(kotlin("test"))
+  testImplementation("io.mockk:mockk:1.13.13")
 }
 
 compose.desktop {
@@ -26,31 +25,23 @@ compose.desktop {
   }
 }
 
-tasks.getByName<Test>("test") {
-  useJUnitPlatform()
-  systemProperties("java.util.logging.config.file" to "${project.buildDir}/resources/test/logging-test.properties")
-  testLogging {
-    showStandardStreams = true
+tasks {
+  getByName<Test>("test") {
+    useJUnitPlatform()
+    systemProperties("java.util.logging.config.file" to "${project.layout.buildDirectory}/resources/test/logging-test.properties")
+    testLogging {
+      showStandardStreams = true
+    }
   }
-}
 
-tasks.withType<JavaCompile> {
-  options.encoding = "UTF-8"
-}
+  getByName<Jar>("jar") {
+    from(sourceSets.main.get().output)
 
-java {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(15))
+    duplicatesStrategy = DuplicatesStrategy.WARN
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+      configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
   }
-}
-
-tasks.getByName<Jar>("jar") {
-  from(sourceSets.main.get().output)
-
-  duplicatesStrategy = DuplicatesStrategy.WARN
-
-  dependsOn(configurations.runtimeClasspath)
-  from({
-    configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-  })
 }

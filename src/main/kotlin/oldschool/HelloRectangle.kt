@@ -1,11 +1,10 @@
-package oldschool;
+package oldschool
 
-import static impl.Tools.ToDo;
-
-public class HelloRectangle {
+object HelloRectangle {
     /**
      * This function should print:
-     * <p>
+     *
+     *
      * ####
      * ####
      * ####
@@ -13,7 +12,8 @@ public class HelloRectangle {
      * ####
      * ####
      */
-    public static void main(String[] args) {
-        ToDo("Print a 4x6 rectangle using # to paint it!");
+    @JvmStatic
+    fun main(args: Array<String>) {
+        TODO("Print a 4x6 rectangle using # to paint it!")
     }
 }

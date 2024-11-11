@@ -48,19 +48,19 @@ or click [here](https://github.com/team4186/2021-intro-java/archive/refs/heads/m
 After the download just unzip on your work folder (can be your desktop)
 
 ## Instructions
-Exercises are located under `src/main/java`, recommended order is (heads up IntelliJ hides the file extension):
-1. `Types.java`
-2. `Variables.java` 
-3. `Expressions.java`
-4. `ControlFlow.java`
+Exercises are located under `src/main/kotlin`, recommended order is (heads up IntelliJ hides the file extension):
+1. `Types.kt`
+2. `Variables.kt` 
+3. `Expressions.kt`
+4. `ControlFlow.kt`
 5. `oldschool/*`
 6. `maze/Maze.java`
-7. `apps.*`
+7. `cli.Maze.kt`/`ui.Maze.kt`
 
 ### Test based
 `Types`, `Variables`, `Expressions`, `ControlFlow`, and `Maze` all have tests to evaluate your answers. They are not super smart tests and you can cheat your way around then. Recommended direction is to experiment and try to solve each exercise in different ways (maybe find some cases where the tests fail).
 
-The `Maze` are more advanced and we will come back to them bellow.
+The `Maze` are more advanced, we will come back to them bellow.
 
 To run the tests right click (context menu) over the project line in the `project` tab and then click in `run tests...`.
 ![run the tests](docs/run-tests.png)
@@ -87,19 +87,19 @@ replace `oldschool.Hello` by the program you want to run (program is any class w
 ### Mazes
 ![Mazes](docs/mazes-gui.png)
 Besides being a testable exercise, the Mazes can be run in a terminal window or in a GUI application.
-You can run `MazeApp` or the `MazeCLI` using the context menu, gutter icon, or terminal.
-You can play with the code and add new Mazes (follow the other mazes template) and the apps will recognize them.
+You can run `ui.Maze` or the `cli.Maze` using the context menu, gutter icon, or terminal.
+You can play with the code and add new Mazes (follow the other mazes template) and the cli will recognize them.
 
 For the GUI version:
 ```
 $ gradlew jar
 wait the build
-$ java -cp build\libs\2021-java-intro-1.0-SNAPSHOT.jar apps.MazeApp
+$ java -cp build\libs\2021-java-intro-1.0-SNAPSHOT.jar ui.Maze
 ```
 
 For the CLI version:
 ```
 $ gradlew jar
 wait the build
-$ java -cp build\libs\2021-java-intro-1.0-SNAPSHOT.jar apps.MazeCLI
+$ java -cp build\libs\2021-java-intro-1.0-SNAPSHOT.jar cli.Maze
 ```

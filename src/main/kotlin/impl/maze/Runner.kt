@@ -1,145 +1,137 @@
-package impl.maze;
+package impl.maze
 
-import org.jetbrains.annotations.NotNull;
+class Runner(scenario: Scenario) {
+    val labyrinth: Labyrinth = Labyrinth(scenario.createMap())
+    private var robot: Robot
+    private val scenario: Scenario
+    private val recorder = CommandsRecorder()
 
-public class Runner {
-    public final Labyrinth labyrinth;
-    private Robot robot;
-    private final Scenario scenario;
-    private final CommandsRecorder recorder = new CommandsRecorder();
+    var isSolved: Boolean = false
+        private set
+    private var idleCount = 0
 
-    private boolean solved = false;
-    private int idleCount = 0;
-    private static final int MAX_IDLE = 5;
-
-    public Runner(@NotNull Scenario scenario) {
-        labyrinth = new Labyrinth(scenario.createMap());
-        robot = initRobot(labyrinth);
-        this.scenario = scenario;
+    init {
+        robot = initRobot(labyrinth)
+        this.scenario = scenario
     }
 
-    public Robot robot() {
-        return robot;
+    fun robot(): Robot {
+        return robot
     }
 
-    public boolean isSolved() {
-        return solved;
-    }
-
-    public void run() {
-        boolean isRunning = true;
+    fun run() {
+        var isRunning = true
 
         while (isRunning) {
-            step();
+            step()
 
-            if (idleCount > MAX_IDLE || solved) {
-                isRunning = false;
+            if (idleCount > MAX_IDLE || isSolved) {
+                isRunning = false
             }
         }
     }
 
-    @NotNull
-    public Robot step() {
-        recorder.move = false;
-        recorder.rotate = 0;
-        scenario.step(robot, recorder);
+    fun step(): Robot {
+        recorder.move = false
+        recorder.rotate = 0
+        scenario.step(robot, recorder)
 
-        final char rotation = rotate(robot, recorder.rotate);
+        val rotation = rotate(robot, recorder.rotate)
 
         if (recorder.move) {
-            int x = robot.x, y = robot.y;
-            switch (robot.rotation) {
-                case '←' -> x--;
-                case '↑' -> y--;
-                case '→' -> x++;
-                case '↓' -> y++;
+            var x = robot.x
+            var y = robot.y
+            when (robot.rotation) {
+                '←' -> x--
+                '↑' -> y--
+                '→' -> x++
+                '↓' -> y++
             }
             // TODO guard ranges
-            switch (labyrinth.cells[y].charAt(x)) {
-                case '#' -> {
-                    idleCount += 1;
-                    robot = new Robot(robot.x, robot.y, rotation);
+            when (labyrinth.cells[y][x]) {
+                '#' -> {
+                    idleCount += 1
+                    robot = Robot(robot.x, robot.y, rotation)
                 }
-                case 'x' -> {
-                    idleCount = 0;
-                    solved = true;
-                    robot = new Robot(x, y, rotation);
+
+                'x' -> {
+                    idleCount = 0
+                    isSolved = true
+                    robot = Robot(x, y, rotation)
                 }
-                default -> {
-                    idleCount = 0;
-                    robot = new Robot(x, y, rotation);
+
+                else -> {
+                    idleCount = 0
+                    robot = Robot(x, y, rotation)
                 }
             }
         } else if (recorder.rotate == 0) {
-            idleCount += 1;
+            idleCount += 1
         } else {
-            idleCount += 1;
-            robot = new Robot(robot.x, robot.y, rotation);
+            idleCount += 1
+            robot = Robot(robot.x, robot.y, rotation)
         }
 
-        return robot;
+        return robot
     }
 
-    @NotNull
-    private static Robot initRobot(@NotNull Labyrinth labyrinth) {
-        String[] cells = labyrinth.cells;
-        for (int y = 0; y < cells.length; y++) {
-            String line = cells[y];
-            for (int x = 0; x < line.length(); x++) {
-                char c = line.charAt(x);
+    private inner class CommandsRecorder : Commands {
+        var move: Boolean = false
+        var rotate: Int = 0
 
-                switch (c) {
-                    case Labyrinth.ORIENTATION_180:
-                    case Labyrinth.ORIENTATION_90:
-                    case Labyrinth.ORIENTATION_0:
-                    case Labyrinth.ORIENTATION_270:
-                        return new Robot(x, y, c);
+        override fun stop() {
+            move = false
+            rotate = 0
+        }
+
+        override fun move() {
+            move = true
+        }
+
+        override fun rotateClockwise() {
+            rotate = 1
+        }
+
+        override fun rotateCounterClockwise() {
+            rotate = -1
+        }
+
+        override fun peek(): Char {
+            var x = robot.x
+            var y = robot.y
+            when (robot.rotation) {
+                '←' -> x--
+                '↑' -> y--
+                '→' -> x++
+                '↓' -> y++
+            }
+
+            return labyrinth.cells[y][x]
+        }
+    }
+
+    companion object {
+        private const val MAX_IDLE = 5
+
+        private fun initRobot(labyrinth: Labyrinth): Robot {
+            val cells = labyrinth.cells
+            for (y in cells.indices) {
+                val line = cells[y]
+                for (x in line.indices) {
+                    when (val c = line[x]) {
+                        Labyrinth.ORIENTATION_180, Labyrinth.ORIENTATION_90, Labyrinth.ORIENTATION_0, Labyrinth.ORIENTATION_270 -> return Robot(
+                            x,
+                            y,
+                            c
+                        )
+                    }
                 }
             }
-        }
-        throw new IllegalArgumentException("Map does not have a robot in it");
-    }
-
-    private static char rotate(@NotNull Robot robot, int direction) {
-        return (char) (((4 + (robot.rotation - Labyrinth.ORIENTATION_180) + direction) % 4) + Labyrinth.ORIENTATION_180);
-    }
-
-    private class CommandsRecorder implements Commands {
-        boolean move = false;
-        int rotate = 0;
-
-        @Override
-        public void stop() {
-            move = false;
-            rotate = 0;
+            throw IllegalArgumentException("Map does not have a robot in it")
         }
 
-        @Override
-        public void move() {
-            move = true;
-        }
-
-        @Override
-        public void rotateClockwise() {
-            rotate = 1;
-        }
-
-        @Override
-        public void rotateCounterClockwise() {
-            rotate = -1;
-        }
-
-        @Override
-        public char peek() {
-            int x = robot.x, y = robot.y;
-            switch (robot.rotation) {
-                case '←' -> x--;
-                case '↑' -> y--;
-                case '→' -> x++;
-                case '↓' -> y++;
-            }
-
-            return labyrinth.cells[y].charAt(x);
+        private fun rotate(robot: Robot, direction: Int): Char {
+            return (((4 + (robot.rotation.code - Labyrinth.ORIENTATION_180.code) + direction) % 4) + Labyrinth.ORIENTATION_180.code).toChar()
         }
     }
 }

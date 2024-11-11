@@ -1,88 +1,70 @@
-import org.junit.jupiter.api.*;
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.Callable;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("03-Control Flow")
-class ControlFlowTest {
+internal class ControlFlowTest {
     @Test
-    @Order(0)
-    @DisplayName("Call the callback")
-    void callMe() {
-        ControlFlow controlFlow = new ControlFlow();
-        assertEquals(controlFlow.callMe(() -> "One"), "One");
-        assertEquals(controlFlow.callMe(() -> "Two"), "Two");
-        assertEquals(controlFlow.callMe(() -> "Three"), "Three");
+    fun `Call the callback`() {
+        val controlFlow = ControlFlow()
+        assertEquals("One", controlFlow.callMe { "One" })
+        assertEquals("Two", controlFlow.callMe { "Two" })
+        assertEquals("Three", controlFlow.callMe { "Three" })
     }
 
     @Test
-    @Order(1)
-    @DisplayName("Use an if statement to return the correct value")
-    void useAnIf() {
-        ControlFlow controlFlow = new ControlFlow();
+    fun `Use an if statement to return the correct value`() {
+        val controlFlow = ControlFlow()
 
-        Object onTrue = "True";
-        Object onFalse = "False";
+        val onTrue: Any = "True"
+        val onFalse: Any = "False"
 
-        assertEquals(controlFlow.useAnIf(true, onTrue, onFalse), onTrue);
-        assertEquals(controlFlow.useAnIf(false, onTrue, onFalse), onFalse);
+        assertEquals(onTrue, controlFlow.useAnIf(true, onTrue, onFalse))
+        assertEquals(onFalse, controlFlow.useAnIf(false, onTrue, onFalse))
     }
 
     @Test
-    @Order(2)
-    @DisplayName("Create a switch statement that returns the correct value or null if none found")
-    void useASwitch() {
-        ControlFlow controlFlow = new ControlFlow();
+    fun `Create a switch statement that returns the correct value or null if none found`() {
+        val controlFlow = ControlFlow()
 
-        Callable<Object> one = () -> "One";
-        Callable<Object> two = () -> "Two";
-        Callable<Object> three = () -> "Three";
-        Callable<Object> four = () -> "Four";
+        val one = { "One" }
+        val two = { "Two" }
+        val three = { "Three" }
+        val four = { "Four" }
 
-        assertNull(controlFlow.useASwitch(0, one, two, three, four));
-        assertEquals(controlFlow.useASwitch(1, one, two, three, four), "One");
-        assertEquals(controlFlow.useASwitch(2, one, two, three, four), "Two");
-        assertEquals(controlFlow.useASwitch(3, one, two, three, four), "Three");
-        assertEquals(controlFlow.useASwitch(4, one, two, three, four), "Four");
-        assertNull(controlFlow.useASwitch(5, one, two, three, four));
+        assertNull(controlFlow.useASwitch(0, one, two, three, four))
+        assertEquals("One", controlFlow.useASwitch(1, one, two, three, four))
+        assertEquals("Two", controlFlow.useASwitch(2, one, two, three, four))
+        assertEquals("Three", controlFlow.useASwitch(3, one, two, three, four))
+        assertEquals("Four", controlFlow.useASwitch(4, one, two, three, four))
+        assertNull(controlFlow.useASwitch(5, one, two, three, four))
     }
 
     @Test
-    @Order(3)
-    @DisplayName("A simple for loop")
-    void useAFor() {
-        ControlFlow controlFlow = new ControlFlow();
-        final int[] counter = {0};
-        controlFlow.useAFor(4, (i) -> counter[0]++);
-        assertEquals(counter[0], 4);
+    fun `A simple for loop`() {
+        val controlFlow = ControlFlow()
+        val counter = intArrayOf(0)
+        controlFlow.useAFor(4) { i: Int -> counter[0]++ }
+        assertEquals(counter[0], 4)
     }
 
     @Test
-    @Order(4)
-    @DisplayName("A simple foreach loop")
-    void useAForEach() {
-        ControlFlow controlFlow = new ControlFlow();
-        List<Object> elements = Arrays.asList("0", "1", "2", "3");
-        final String[] result = {""};
-        controlFlow.useAForEach(elements, (element) -> result[0] += element);
-        assertEquals(result[0], "0123");
+    fun `A simple foreach loop`() {
+        val controlFlow = ControlFlow()
+        val elements: List<Any> = mutableListOf<Any>("0", "1", "2", "3")
+        val result = buildString {
+            controlFlow.useAForEach(elements) { element: Any -> append(element) }
+        }
+        assertEquals("0123", result)
     }
 
     @Test
-    @Order(5)
-    @DisplayName("A while loop")
-    void useAWhile() {
-        ControlFlow controlFlow = new ControlFlow();
+    fun `A while loop`() {
+        val controlFlow = ControlFlow()
 
-        final int[] loops = {5};
-        final int[] counter = {0};
+        val loops = intArrayOf(5)
+        val counter = intArrayOf(0)
 
-        controlFlow.useAWhile(() -> loops[0]-- != 0, () -> counter[0]++);
-        assertEquals(counter[0], 5);
+        controlFlow.useAWhile({ loops[0]-- != 0 }, { counter[0]++ })
+        assertEquals(5, counter[0])
     }
 }

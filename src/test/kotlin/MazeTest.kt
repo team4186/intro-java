@@ -1,45 +1,28 @@
-import impl.maze.Runner;
-import impl.maze.Scenario;
-import maze.Maze;
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.*;
+import impl.maze.Runner
+import impl.maze.Scenario
+import maze.Maze.*
+import kotlin.test.Test
+import kotlin.test.assertTrue
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("04-Mazes")
-class MazeTest {
+internal class MazeTest {
     @Test
-    @Order(0)
-    @DisplayName("Simple maze.Maze")
-    void simple() {
-        Maze.Simple maze = new Maze.Simple();
-        Runner runner = run(maze);
-        assertTrue(runner.isSolved());
+    fun `Simple Maze`() {
+        assertTrue(run(Simple()).isSolved)
     }
 
     @Test
-    @Order(1)
-    @DisplayName("Not so simple maze.Maze")
-    void notSoSimple() {
-        Maze.NotSoSimple maze = new Maze.NotSoSimple();
-        Runner runner = run(maze);
-        assertTrue(runner.isSolved());
+    fun `Not so simple maze`() {
+        assertTrue(run(NotSoSimple()).isSolved)
     }
 
     @Test
-    @Order(2)
-    @DisplayName("Kinda Complex maze.Maze")
-    void kindaComplex() {
-        Maze.KindaComplex maze = new Maze.KindaComplex();
-        Runner runner = run(maze);
-        assertTrue(runner.isSolved());
+    fun `Kinda Complex maze`() {
+        assertTrue(run(KindaComplex()).isSolved)
     }
 
-    @NotNull
-    private Runner run(Scenario maze) {
-        Runner runner = new Runner(maze);
-        runner.run();
-        return runner;
+    private fun run(maze: Scenario): Runner {
+        val runner = Runner(maze)
+        runner.run()
+        return runner
     }
 }

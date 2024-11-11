@@ -1,12 +1,9 @@
-package impl;
+@file:Suppress("FunctionName")
 
-public class Tools {
-    public static <T> T ToDo() {
-        return ToDo(null);
-    }
+package impl
 
-    public static <T> T ToDo(String message) {
-        throw new TODO(message != null ? message : "Not Implemented");
-    }
+
+inline fun <reified T> ToDo(message: String = "Not Implemented"): T {
+    TODO(message)
 }
 

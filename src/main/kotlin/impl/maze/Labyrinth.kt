@@ -1,14 +1,10 @@
-package impl.maze;
+package impl.maze
 
-public class Labyrinth {
-    public static final char ORIENTATION_180 = '←';
-    public static final char ORIENTATION_90 = '↑';
-    public static final char ORIENTATION_0 = '→';
-    public static final char ORIENTATION_270 = '↓';
-
-    public final String[] cells;
-
-    public Labyrinth(String[] cells) {
-        this.cells = cells;
+class Labyrinth(val cells: Array<String>) {
+    companion object {
+        const val ORIENTATION_180: Char = '←'
+        const val ORIENTATION_90: Char = '↑'
+        const val ORIENTATION_0: Char = '→'
+        const val ORIENTATION_270: Char = '↓'
     }
 }

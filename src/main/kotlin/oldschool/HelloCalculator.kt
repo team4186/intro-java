@@ -1,9 +1,8 @@
-package oldschool;
+package oldschool
 
-import static impl.Tools.ToDo;
-
-public class HelloCalculator {
-    public static void main(String[] args) {
-        ToDo("Get the first 2 args sum and print the result");
+object HelloCalculator {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        TODO("Get the first 2 args sum and print the result")
     }
 }

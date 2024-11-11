@@ -1,38 +1,37 @@
-import static impl.Tools.ToDo;
+import impl.ToDo
 
-public class Types {
-    void booleans() {
-        boolean aFalse = ToDo("Assign me with a false value");
-        boolean aTrue = ToDo("Assign me with a true value");
+class Types {
+    fun booleans() {
+        val aFalse: Boolean = ToDo("Assign me with a false value")
+        val aTrue: Boolean = ToDo("Assign me with a true value")
     }
 
-    void integers() {
-        int aBinaryInteger = ToDo("Assign me with a binary formatted number");
-        int anOctalInteger = ToDo("Assign me with an octal formatted number");
-        int aHexInteger = ToDo("Assign me with a hexadecimal  formatted number");
-        int aDecInteger = ToDo("Assign me with a decimal formatted number");
+    fun integers() {
+        val aBinaryInteger: Int = ToDo("Assign me with a binary formatted number")
+        val aHexInteger: Int = ToDo("Assign me with a hexadecimal  formatted number")
+        val aDecInteger: Int = ToDo("Assign me with a decimal formatted number")
 
-        long aSixtyFourBitInteger = ToDo("Assign me with a 64 bit number");
+        val aSixtyFourBitInteger: Long = ToDo("Assign me with a 64 bit number")
     }
 
-    void floats() {
-        float aThirtyTwoBitFloatingPoint = ToDo("Assign me with a 32 bit number");
-        double aSixtyFourBitFloatingPoint = ToDo("Assign me with a 64 bit number");
+    fun floats() {
+        val aThirtyTwoBitFloatingPoint: Float = ToDo("Assign me with a 32 bit number")
+        val aSixtyFourBitFloatingPoint: Double = ToDo("Assign me with a 64 bit number")
     }
 
-    void text() {
-        char aChar = ToDo("Assign me with a char");
-        String aString = ToDo("Assign me with a String");
+    fun text() {
+        val aChar: Char = ToDo("Assign me with a char")
+        val aString: String = ToDo("Assign me with a String")
     }
 
-    void arrays() {
-        int[] anArrayOfInt = ToDo("Assign me an array of Ints");
-        double[] anArrayOfDoubles = ToDo("Assign me an array of Doubles");
-        boolean[] anArrayOfBoolean = ToDo("Assign me an array of Booleans");
-        String[] anArrayOfString = ToDo("Assign me an array of String");
+    fun arrays() {
+        val anArrayOfInt: IntArray = ToDo("Assign me an array of Ints")
+        val anArrayOfDoubles: DoubleArray = ToDo("Assign me an array of Doubles")
+        val anArrayOfBoolean: BooleanArray = ToDo("Assign me an array of Booleans")
+        val anArrayOfString: Array<String> = ToDo("Assign me an array of String")
 
-        int[][] arrayOfArray = ToDo("Assign me an array of array of Ints");
+        val arrayOfArray: Array<IntArray> = ToDo("Assign me an array of array of Ints")
 
-        Object[] andArrayOfAnything = ToDo("Assign me an array of Anything");
+        val andArrayOfAnything: Array<Any> = ToDo("Assign me an array of Anything")
     }
 }

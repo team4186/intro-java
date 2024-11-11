@@ -1,32 +1,21 @@
-import org.junit.jupiter.api.*;
+import kotlin.test.*
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("01-Variables")
-class VariablesTest {
+internal class VariablesTest {
+    private val variables = Variables()
 
     @Test
-    @Order(1)
-    @DisplayName("Variables can be reassigned")
-    void reassignment() {
-        Variables variables = new Variables();
-        assertDoesNotThrow(variables::reassignment, "You need to complete the assignment to pass the test");
+    fun `Variables can be reassigned`() {
+        assertDoesNotThrow { variables.reassignment() }
     }
 
     @Test
-    @Order(2)
-    @DisplayName("Final variables cannot be reassigned")
-    void finalVariables() {
-        Variables variables = new Variables();
-        assertDoesNotThrow(variables::finalVariables, "You need to complete the assignment to pass the test");
+    fun `Final variables cannot be reassigned`() {
+        assertDoesNotThrow { variables.finalVariables() }
     }
 
     @Test
-    @Order(3)
-    @DisplayName("Copy vs Reference entities")
-    void copyVsReference() {
-        Variables variables = new Variables();
-        assertDoesNotThrow(variables::copyVsReference, "You need to complete the assignment to pass the test");
+    fun `Copy vs Reference entities`() {
+        assertDoesNotThrow { variables.copyVsReference() }
     }
+
 }

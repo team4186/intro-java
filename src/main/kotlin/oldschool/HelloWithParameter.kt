@@ -1,9 +1,9 @@
-package oldschool;
+package oldschool
 
-import static impl.Tools.ToDo;
 
-public class HelloWithParameter {
-    public static void main(String[] args) {
-        ToDo("Print something on the terminal using args!");
+object HelloWithParameter {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        TODO("Print something on the terminal using args!")
     }
 }

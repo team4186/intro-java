@@ -1,13 +1,13 @@
-package impl.maze;
+package impl.maze
 
-public interface Commands {
-    void stop();
+interface Commands {
+    fun stop()
 
-    void move();
+    fun move()
 
-    void rotateClockwise();
+    fun rotateClockwise()
 
-    void rotateCounterClockwise();
+    fun rotateCounterClockwise()
 
-    char peek();
+    fun peek(): Char
 }

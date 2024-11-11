@@ -1,22 +1,20 @@
-import java.util.Arrays;
+import impl.ToDo
 
-import static impl.Tools.ToDo;
+class Variables {
+    fun reassignment() {
+        var startingValue = ToDo<Any>("Assign an initial value")
 
-public class Variables {
-    public void reassignment() {
-        int startingValue = ToDo("Assign an initial value");
+        println("Value: $startingValue")
 
-        System.out.println("Value: " + startingValue);
+        startingValue = ToDo("Assign another value")
 
-        startingValue = ToDo("Assign another value");
-
-        System.out.println("Value: " + startingValue);
+        println("Value: $startingValue")
     }
 
-    public void finalVariables() {
-        final int startingValue = ToDo("Assign an initial value");
+    fun finalVariables() {
+        val startingValue = ToDo<Int>("Assign an initial value")
 
-        System.out.println("Value: " + startingValue);
+        println("Value: $startingValue")
 
         // NOTE the next lines are commented out because otherwise the code will not compile
 //        startingValue = ToDo("Assign another value");
@@ -24,37 +22,35 @@ public class Variables {
     }
 
 
-    public void copyVsReference() {
-        System.out.println("Pass by copy");
-        int variableA = ToDo("Assign an initial value");
-        int variableB = variableA;
+    fun copyVsReference() {
+        println("Pass by copy")
+        var variableA = ToDo<Int>("Assign an initial value")
+        val variableB = variableA
 
-        System.out.println("Before:");
-        System.out.println("\tvariableA = " + variableA);
-        System.out.println("\tvariableB = " + variableB);
+        println("Before:")
+        println("\tvariableA = $variableA")
+        println("\tvariableB = $variableB")
 
-        variableA = ToDo("Assign another value");
+        variableA = ToDo("Assign another value")
 
-        System.out.println("After:");
-        System.out.println("\tvariableA = " + variableA);
-        System.out.println("\tvariableB = " + variableB);
+        println("After:")
+        println("\tvariableA = $variableA")
+        println("\tvariableB = $variableB")
 
-        System.out.println("\n-----------------");
-        System.out.println("Pass by reference");
-        int[] arrayA = ToDo("Assign an array with at least 5 elements");
-        int[] arrayB = arrayA;
+        println("\n-----------------")
+        println("Pass by reference")
+        val arrayA = ToDo<IntArray>("Assign an array with at least 5 elements")
+        val arrayB = arrayA
 
 
-        System.out.println("Before:");
-        System.out.println("\tarrayA = " + Arrays.toString(arrayA));
-        System.out.println("\tarrayB = " + Arrays.toString(arrayB));
+        println("Before:")
+        println("\tarrayA = " + arrayA.contentToString())
+        println("\tarrayB = " + arrayB.contentToString())
 
-        arrayA[3] = ToDo("Assign another value to the 3th element. Remember arrays start from 0.");
+        arrayA[3] = ToDo("Assign another value to the 3th element. Remember arrays start from 0.")
 
-        System.out.println("After:");
-        System.out.println("\tarrayA = " + Arrays.toString(arrayA));
-        System.out.println("\tarrayB = " + Arrays.toString(arrayB));
+        println("After:")
+        println("\tarrayA = " + arrayA.contentToString())
+        println("\tarrayB = " + arrayB.contentToString())
     }
-
-
 }

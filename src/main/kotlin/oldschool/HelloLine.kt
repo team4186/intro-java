@@ -1,14 +1,14 @@
-package oldschool;
+package oldschool
 
-import static impl.Tools.ToDo;
-
-public class HelloLine {
+object HelloLine {
     /**
      * This function should print:
-     * <p>
+     *
+     *
      * ####
      */
-    public static void main(String[] args) {
-        ToDo("Print a line of length 4 using # to paint it!");
+    @JvmStatic
+    fun main(args: Array<String>) {
+        TODO("Print a line of length 4 using # to paint it!")
     }
 }

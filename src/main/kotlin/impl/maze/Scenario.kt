@@ -1,10 +1,8 @@
-package impl.maze;
+package impl.maze
 
-import org.jetbrains.annotations.NotNull;
+interface Scenario {
+    fun createMap(): Array<String>
 
-public interface Scenario {
-    String[] createMap();
-
-    void step(@NotNull Robot robot, @NotNull Commands commands);
+    fun step(robot: Robot, commands: Commands)
 }
 
