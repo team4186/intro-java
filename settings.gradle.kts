@@ -1,4 +1,4 @@
-rootProject.name = "2021-java-intro"
+rootProject.name = "intro"
 
 pluginManagement {
   repositories {
