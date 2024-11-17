@@ -34,3 +34,5 @@ hs_err_pid*
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
+
+!/gradle/wrapper/gradle-wrapper.jar
