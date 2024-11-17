@@ -21,7 +21,7 @@ dependencies {
 
 compose.desktop {
   application {
-    mainClass = "EntryPointKt"
+    mainClass = "ui.Maze"
   }
 }
 
